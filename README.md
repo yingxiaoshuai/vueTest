@@ -25,3 +25,21 @@
      return {a:1,b:2}
  }
 ```
+
+### 踩坑3
+* Vue Ts 在使用箭头函数时，不能在new object(()=>{})中使用，否则使用的this指向会指向创建的类，而不是vueComponent所代理的this
+``` typescript
+  BMITable: CBcTable = new CBcTable({
+    setRowStyle: (rowData) => {
+      // 这个this
+      console.log(this)
+      if (rowData.type === this.weightStatus)
+        return { color: '#00bcd4' }
+    }
+  });
+
+  created(){
+    // 这个this 这两个的this是不一样的
+    console.log(this)
+  }
+  ```
