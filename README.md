@@ -28,6 +28,7 @@
 
 ### 踩坑3
 * Vue Ts 在使用箭头函数时，不能在new object(()=>{})中使用，否则使用的this指向会指向创建的类，而不是vueComponent所代理的this
+* 构造函数的this指向本身的class,而方法的this指向vueComponent，也就是说，不要在初始化的时候使用箭头函数，或者不要在箭头函数中使用this
 ``` typescript
   BMITable: CBcTable = new CBcTable({
     setRowStyle: (rowData) => {
