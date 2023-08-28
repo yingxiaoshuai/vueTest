@@ -19,10 +19,16 @@
  ```
 
 ### 踩坑2
-* Vue Ts 在ui显示这块禁止使用get方法返回数据，会导致数据无法被vue代理,产生数据变更了但ui没有变更bug，get方法只适用于数据的计算。
+* Vue Ts 禁止使用get方法返回数据的对象去显示页面，会导致数据无法被vue代理,产生数据变更了但页面没有变更bug，get方法只适用于数据的计算和返回属性。
 ``` typescript
+// 使用对象在页面显示出来是禁止的,<div>{{test.a}}</div>
  get test(){
-     return {a:1,b:2}
+     return {a:1,b:2};
+ }
+
+// 这个是可以的,<div>{{test}}</div>
+  get test(){
+     return 'test';
  }
 ```
 
