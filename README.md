@@ -50,3 +50,20 @@
     console.log(this)
   }
   ```
+
+  
+### 踩坑4
+* Vue Ts extends继承对象不能和@装饰器一起使用，在组件中使用 extends VueComponent 以及 @Prop() 装饰器时，确实可能会出现 prop 值共享的问题。这是因为 TypeScript 默认会将装饰器应用于类的原型，而不是类的实例。这可能导致多个组件实例共享相同的 prop 数据，而不是每个组件实例都有其自己的 prop 数据。
+``` typescript
+  export default class A extends VueComponent {
+  @Prop() patientInfo: CBcPatientInfo;
+  @Prop({ default: false }) hasSelect: boolean;
+}
+
+ export default class B extends VueComponent {
+  created(){
+    // 这边页面看到patientInfo和hasSelect
+    console.log(this.$Prop)
+  }
+}
+  ```
