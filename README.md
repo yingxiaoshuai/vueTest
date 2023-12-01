@@ -66,4 +66,7 @@
     console.log(this.$Prop)
   }
 }
-  ```
+```
+
+### 踩坑5
+* Vue ts 图片导入的时候:src="require('@/assets/img/menu/'+a+'.png')一定要这样使用，不能:src="require(a);这个会出现一个编译之后的打包的样式出现错误，没有hash值的class，这样写回出现一个毫不相关的bug,花了不少时间解决
